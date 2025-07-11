@@ -35,21 +35,37 @@ DrissionPage MCP  是一个基于 DrissionPage 和 FastMCP 的浏览器自动化
 - uv
 
 ## 安装说明
-把本仓库git clone到本地，核心文件是main.py：
+把本仓库git clone到本地，核心文件是main.py。建议先使用 `python -m venv venv-DrissionPage-MCP` 创建并激活虚拟环境，然后运行 `pip install -r requirements.txt` 安装依赖。
 
-### 安装到Cursor编辑器
+### 安装到Cursor/VSCode编辑器
 
-![安装说明](img/install_to_Cursor1.png)
-![安装说明](img/install_to_cursor2.png)
+请将以下对应您操作系统的配置代码粘贴到编辑器的`mcpServers`设置中。
 
-### 安装到vscode编辑器
+#### Windows 推荐配置 (更可靠)
 
-![安装说明](img/install_to_vscode0.png)
-![安装说明](img/install_to_vscode1.png)
-![安装说明](img/install_to_vscode2.png)
+这种方法通过指定虚拟环境中 `python.exe` 的绝对路径来启动服务器，可以避免很多在 Windows 上常见的环境和路径问题，是**推荐**的方式。
+
+```json
+{
+  "mcpServers": {
+    "DrssionPageMCP": {
+      "type": "stdio",
+      "command": "C:\\path\\to\\your\\project\\DrssionPageMCP\\venv-DrissionPage-MCP\\Scripts\\python.exe",
+      "args": [
+        "C:\\path\\to\\your\\project\\DrssionPageMCP\\main.py"
+      ]
+    }
+  }
+}
+```
+**注意:**
+- **请务必将 `C:\\path\\to\\your\\project` 修改为您自己电脑上的实际绝对路径。**
+- 在 JSON 文件中，Windows 路径的反斜杠 `\` 需要转义，即写成双反斜杠 `\\`。
 
 
-请将以下配置代码粘贴到编辑器的`mcpServers`设置中（请填写`你自己电脑上 main.py 文件的绝对路径`）：
+#### macOS / Linux 推荐配置
+
+在 macOS 和 Linux 上，如果 `uv` 已正确安装并位于 `PATH` 环境变量中，可以直接使用 `uv` 命令。
 
 ```json
 {
@@ -59,29 +75,19 @@ DrissionPage MCP  是一个基于 DrissionPage 和 FastMCP 的浏览器自动化
       "command": "uv",
       "args": [
         "run",
-        "D:\\test10\\DrssionPageMCP\\main.py"
+        "/path/to/your/project/DrssionPageMCP/main.py"
       ]
     }
   }
 }
 ```
-新增mcp配置 ，填写下面的配置：
-``` json
-"DrssionPageMCP": {
-      "type": "stdio",
-      "command": "uv",
-      "args": [
-        "run",
-        "D:\\test10\\DrssionPageMCP\\main.py"
-      ]
-    } 
-```
+**注意:**
+- **请务必将 `/path/to/your/project` 修改为您自己电脑上的实际绝对路径。**
 
-注意事项：
-- 请根据实际路径修改`args`中的路径
-- Windows中路径中的反斜杠需要转义（使用`\\`）
-- 确保`uv`命令在系统PATH中可用
+
+---
 - [《MCP安装参考教程》](https://docs.trae.ai/ide/model-context-protocol)
+
 
 
 ## 调试命令
